@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>La Bussola della Vita</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F4F6F5;--sf:#fff;--ink:#1F3A4A;--mut:#5A6B70;--line:#CBD5D7;--io:#1F7A7A;--fam:#B08040;--lav:#1F3A4A;--inp:#FBFDFC;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#11191D;--sf:#182329;--ink:#E6EEF0;--mut:#93A5AB;--line:#2B3A41;--io:#4DB6B0;--fam:#D4A864;--lav:#9FB6C3;--inp:#131D22;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#11191D;--sf:#182329;--ink:#E6EEF0;--mut:#93A5AB;--line:#2B3A41;--io:#4DB6B0;--fam:#D4A864;--lav:#9FB6C3;--inp:#131D22;color-scheme:dark}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 15px/1.45 Manrope,system-ui,-apple-system,"Segoe UI",sans-serif}
+.wrap{max-width:720px;margin:0 auto;padding:18px 16px 110px}
+h1{font-size:24px;font-weight:800;margin:0;letter-spacing:.01em}
+.sub{color:var(--mut);font-size:13px;margin:2px 0 14px}
+.datebar{display:flex;align-items:center;gap:8px;margin-bottom:18px}
+.datebar button{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:var(--sf);color:var(--ink);font-size:18px;cursor:pointer}
+.datebar .d{flex:1;text-align:center;font-weight:600;text-transform:capitalize}
+.datebar input{position:absolute;opacity:0;pointer-events:none;width:0}
+h2{font-size:19px;margin:0 0 2px;font-weight:800}
+.card{background:var(--sf);border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:14px}
+label.l{display:block;font-size:12px;color:var(--mut);margin:10px 0 4px}
+input[type=text],textarea,select{width:100%;font:inherit;color:var(--ink);background:var(--inp);border:1px solid var(--line);border-radius:9px;padding:9px 10px}
+textarea{resize:vertical;min-height:64px}
+input:focus,textarea:focus,select:focus,button:focus-visible{outline:2px solid var(--io);outline-offset:1px}
+.hub{display:flex;align-items:center;gap:12px;margin:12px 0 4px}
+.hub i{flex:none;width:54px;height:54px;border-radius:50%;border:2px solid var(--io);color:var(--io);display:grid;place-items:center;font-style:normal;font-weight:800}
+.area{margin-top:12px}.area b{display:block;font-size:14px;margin-bottom:4px}
+.cols{display:grid;gap:12px}
+@media(min-width:620px){.cols.three{grid-template-columns:repeat(3,1fr)}}
+.col{border:1.5px solid var(--c);border-radius:12px;padding:12px}
+.col h3{margin:0 0 6px;font-size:14px;color:var(--c);font-weight:800}
+.col input{margin-bottom:7px}
+.io{--c:var(--io)}.fam{--c:var(--fam)}.lav{--c:var(--lav)}
+.item{display:flex;gap:6px;align-items:center;margin-bottom:7px}.item span{width:20px;font-size:12px;color:var(--mut);flex:none}
+.hour{display:grid;grid-template-columns:50px 1fr 92px 36px;gap:6px;align-items:center;margin-bottom:6px;border-left:4px solid var(--line);padding-left:8px}
+.hour[data-a=io]{border-color:var(--io)}.hour[data-a=fam]{border-color:var(--fam)}.hour[data-a=lav]{border-color:var(--lav)}
+.hour time{font-weight:800;color:var(--io);font-size:13px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:6px;text-align:center}
+.stats div{border-radius:10px;border:1.5px solid var(--c);padding:8px 4px;font-size:12px;color:var(--mut)}.stats b{display:block;font-size:18px;color:var(--c)}
+.moods{display:flex;gap:10px;margin:8px 0}
+.moods button{flex:1;font-size:26px;padding:10px;border-radius:12px;border:1.5px solid var(--line);background:var(--inp);cursor:pointer}
+.moods button[aria-pressed=true]{border-color:var(--io);background:color-mix(in srgb,var(--io) 16%,var(--sf))}
+.btn{width:100%;padding:13px;border:0;border-radius:12px;background:var(--io);color:#fff;font:800 15px Manrope,system-ui,sans-serif;cursor:pointer;margin-top:6px}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]) .btn{color:#0b1316}}
+nav{position:fixed;left:0;right:0;bottom:0;z-index:5;display:flex;justify-content:center;gap:4px;background:var(--sf);border-top:1px solid var(--line);padding:6px 8px calc(6px + env(safe-area-inset-bottom,0px))}
+nav button{flex:1;max-width:150px;background:none;border:0;border-radius:10px;padding:8px 2px;color:var(--mut);font:600 12px Manrope,system-ui,sans-serif;cursor:pointer}
+nav button[aria-current=page]{color:var(--io);background:color-mix(in srgb,var(--io) 14%,var(--sf))}
+nav button em{display:block;font-style:normal;font-size:18px}
+.ex{display:none}.ex.on{display:block}.ex button{display:block;width:100%;text-align:left;padding:12px;margin-top:8px;border-radius:10px;border:1.5px solid var(--line);background:var(--inp);color:var(--ink);font:600 14px Manrope,system-ui,sans-serif;cursor:pointer}.ex button small{display:block;font-weight:400;color:var(--mut);font-size:12px}.msg{font-size:12px;color:var(--mut);min-height:1.2em;margin:8px 0 0}
+.fl{flex:none;width:36px;height:36px;border-radius:50%;border:1.5px dashed var(--line);background:var(--inp);color:var(--mut);font-size:17px;line-height:1;padding:0;cursor:pointer}.fl:not([data-v=""]){border-style:solid;border-color:var(--io);color:var(--ink)}.item input{margin:0}
+.foot{text-align:center;color:var(--mut);font-size:12px;margin-top:20px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>La Bussola della Vita</h1>
+  <p class="sub">Osservo il sistema. Scelgo le priorità. Organizzo le azioni. Rileggo i risultati.</p>
+  <div class="datebar">
+    <button id="prev" aria-label="Giorno precedente">‹</button>
+    <div class="d" id="dlabel"></div>
+    <button id="next" aria-label="Giorno successivo">›</button>
+  </div>
+  <main id="main"></main>
+  <p class="foot">Consapevolezza, orientamento, disciplina. I dati restano sul tuo dispositivo.</p>
+</div>
+<nav id="nav"></nav>
+<script>
+const AREAS=["Famiglia","Stato","Tasse","Salute","Lavoro","Negozi e servizi","Vita sociale","Finanze personali","Divertimento","Tempo libero","Vacanze"];
+const COLS=[["io","Io"],["fam","Famiglia"],["lav","Lavoro"]];
+const TABS=[["sistema","🧭","Sistema"],["prio","🎯","Priorità"],["giorno","🗓️","Giornata"],["ris","🔁","Risultato"]];
+const KEY="bussola-vita-v1";
+let S={sistema:{},prio:{},days:{}},tab="sistema";
+try{const r=localStorage.getItem(KEY);if(r)S=Object.assign(S,JSON.parse(r))}catch(e){}
+const iso=d=>d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
+let D=iso(new Date());
+let timer;
+function save(){clearTimeout(timer);timer=setTimeout(()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}},250)}
+const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+function day(){return S.days[D]||(S.days[D]={})}
+function get(p){let o=p.startsWith("d.")?day():S;p=p.replace(/^d\./,"");for(const k of p.split("|")){if(o==null)return"";o=o[k]}return o??""}
+function set(p,v){let o=p.startsWith("d.")?day():S;p=p.replace(/^d\./,"");const ks=p.split("|");for(let i=0;i<ks.length-1;i++){o=o[ks[i]]||(o[ks[i]]={})}o[ks[ks.length-1]]=v;save()}
+const FACE={"+":"😊","=":"😐","-":"☹️"},LBL={"+":"Bene","=":"Così così","-":"Male"};
+const flag=p=>{const v=get(p);return `<button type="button" class="fl" data-fl="${p}" data-v="${v}" aria-label="Esito: ${LBL[v]||"non segnato"}">${FACE[v]||"✓"}</button>`};
+const field=(p,ph="")=>`<input type="text" data-p="${p}" value="${esc(get(p))}" placeholder="${ph}">`;
+
+function views(){
+if(tab==="sistema")return `<section class="card"><h2>Il sistema</h2><p class="sub">Riconosco le aree della realtà con cui sono in relazione.</p>
+<div class="hub"><i>IO</i><span class="sub" style="margin:0">Al centro ci sono io. Ogni area è in relazione con me: scrivo come sto in ciascuna.</span></div>
+${AREAS.map(a=>`<div class="area"><b>${a}</b>${field("sistema|"+a,"Come sto in quest’area?")}</div>`).join("")}</section>`;
+if(tab==="prio")return `<section class="card"><h2>Le mie priorità</h2><p class="sub">Scrivo tre cose che voglio fare per ciascuna area.</p>
+<div class="cols three">${COLS.map(([k,n])=>`<div class="col ${k}"><h3>${n}</h3>${[0,1,2].map(i=>field(`prio|${k}|${i}`,`Priorità ${i+1}`)).join("")}</div>`).join("")}</div>
+<label class="l">Che cosa conta davvero per me, oggi?</label>${field("d.oggi","Una frase")}</section>`;
+if(tab==="giorno"){
+let h="";for(let i=7;i<=23;i++){const t=String(i).padStart(2,"0")+":00",a=get(`d.ore|${i}|a`);
+h+=`<div class="hour" data-a="${a}" data-h="${i}"><time>${t}</time><input type="text" list="azioni" data-p="d.ore|${i}|t" value="${esc(get(`d.ore|${i}|t`))}" placeholder="Azione"><select data-p="d.ore|${i}|a" aria-label="Area alle ${t}"><option value="">Area</option>${COLS.map(([k,n])=>`<option value="${k}"${a===k?" selected":""}>${n}</option>`).join("")}</select>${flag(`d.ore|${i}|e`)}</div>`}
+return `<section class="card"><h2>Le mie azioni</h2><p class="sub">Scrivo le azioni nelle liste, poi le riporto nell’ora scelta.</p>
+<div class="cols three">${COLS.map(([k,n])=>`<div class="col ${k}"><h3>${n}</h3>${[0,1,2,3,4,5].map(i=>`<div class="item"><span>0${i+1}</span>${field(`d.liste|${k}|${i}`)}${flag(`d.esito|${k}|${i}`)}</div>`).join("")}</div>`).join("")}</div>
+<div class="stats">${COLS.map(([k,n])=>`<div class="${k}" style="--c:var(--${k})"><b id="st-${k}"></b>${n}: azioni · ore</div>`).join("")}</div></section>
+<section class="card"><h2>La mia giornata</h2><p class="sub">Dalle 07:00 alle 23:00. Scelgo l’area per ogni ora.</p>${h}</section><datalist id="azioni"></datalist>`}
+return `<section class="card"><h2>Il risultato</h2><p class="sub">Osservo e ricomincio.</p>
+<label class="l">Come è andata oggi?</label><div class="moods">${[["+","😊"],["=","😐"],["-","☹️"]].map(([v,e])=>`<button data-mood="${v}" aria-pressed="${get("d.mood")===v}" aria-label="${v==="+"?"Bene":v==="="?"Così così":"Male"}">${e}</button>`).join("")}</div>
+<label class="l">Cosa mantengo?</label><textarea data-p="d.mantengo">${esc(get("d.mantengo"))}</textarea>
+<label class="l">Cosa cambio?</label><textarea data-p="d.cambio">${esc(get("d.cambio"))}</textarea>
+<button class="btn" id="again">Ricomincia da domani</button></section>
+<section class="card ex" id="excard"><h2>Esporta</h2><p class="sub">Salva i tuoi dati in un file.</p>
+<button data-ex="md">Questa giornata<small>Testo leggibile (.md)</small></button>
+<button data-ex="csv">Tutti i giorni<small>Tabella per Excel (.csv)</small></button>
+<button data-ex="json">Copia di sicurezza<small>Tutti i dati (.json)</small></button><p class="msg" id="exmsg" role="status"></p></section>`}
+
+function stats(){
+const dl=document.getElementById("azioni");const all=[];
+COLS.forEach(([k])=>{let n=0,o=0;for(let i=0;i<6;i++){const v=get(`d.liste|${k}|${i}`).trim();if(v){n++;all.push(v)}}
+for(let h=7;h<=23;h++)if(get(`d.ore|${h}|a`)===k&&get(`d.ore|${h}|t`).trim())o++;
+const e=document.getElementById("st-"+k);if(e)e.textContent=n+" · "+o})
+if(dl)dl.innerHTML=all.map(v=>`<option value="${esc(v)}">`).join("")}
+
+function render(){
+document.getElementById("main").innerHTML=views();
+document.getElementById("nav").innerHTML=TABS.map(([k,e,n])=>`<button data-t="${k}" ${k===tab?'aria-current="page"':""}><em>${e}</em>${n}</button>`).join("");
+document.getElementById("dlabel").textContent=new Date(D+"T12:00:00").toLocaleDateString("it-IT",{weekday:"long",day:"numeric",month:"long"});
+stats()}
+
+document.addEventListener("input",e=>{const p=e.target.dataset.p;if(!p)return;set(p,e.target.value);
+if(e.target.tagName==="SELECT"){e.target.closest(".hour").dataset.a=e.target.value}stats()});
+document.addEventListener("click",e=>{
+const f=e.target.closest("[data-fl]");if(f){const p=f.dataset.fl,n={"":"+","+":"=","=":"-","-":""}[get(p)];set(p,n);f.dataset.v=n;f.textContent=FACE[n]||"✓";f.setAttribute("aria-label","Esito: "+(LBL[n]||"non segnato"));return}
+const t=e.target.closest("[data-t]");if(t){tab=t.dataset.t;render();scrollTo(0,0);return}
+const m=e.target.closest("[data-mood]");if(m){set("d.mood",m.dataset.mood);render();return}
+if(e.target.id==="again"){shift(1);tab="prio";render();scrollTo(0,0)}});
+function shift(n){const d=new Date(D+"T12:00:00");d.setDate(d.getDate()+n);D=iso(d)}
+document.getElementById("prev").onclick=()=>{shift(-1);render()};
+document.getElementById("next").onclick=()=>{shift(1);render()};
+const AN={io:"Io",fam:"Famiglia",lav:"Lavoro"},MO={"+":"Bene","=":"Così così","-":"Male"};
+const fx=x=>LBL[x]?" – "+LBL[x]:"";
+const cq=v=>'"'+String(v).replace(/"/g,'""')+'"';
+function dayRows(dt,d){const r=[];const add=(t,v,x="")=>{if(String(v).trim())r.push([dt,t,v,x])};
+add("Conta oggi",d.oggi||"");
+for(let h=7;h<=23;h++){const o=(d.ore||{})[h]||{};add("Ora",o.t||"",String(h).padStart(2,"0")+":00"+(o.a?" – "+AN[o.a]:"")+fx(o.e))}
+COLS.forEach(([k,n])=>{for(let i=0;i<6;i++)add("Azione",((d.liste||{})[k]||{})[i]||"",n+fx(((d.esito||{})[k]||{})[i]))});
+add("Esito",MO[d.mood]||"");add("Cosa mantengo",d.mantengo||"");add("Cosa cambio",d.cambio||"");return r}
+function dayMd(dt,d){const L=[`# Bussola della Vita – ${new Date(dt+"T12:00:00").toLocaleDateString("it-IT",{weekday:"long",day:"numeric",month:"long",year:"numeric"})}`,""];
+const sec=(t,a)=>{if(a.length)L.push(`## ${t}`,...a,"")};
+sec("Che cosa conta oggi",d.oggi?[d.oggi]:[]);
+COLS.forEach(([k,n])=>sec("Azioni – "+n,[0,1,2,3,4,5].map(i=>[((d.liste||{})[k]||{})[i]||"",((d.esito||{})[k]||{})[i]]).filter(a=>a[0].trim()).map(a=>"- "+a[0]+fx(a[1]))));
+const ore=[];for(let h=7;h<=23;h++){const o=(d.ore||{})[h]||{};if((o.t||"").trim())ore.push(`- ${String(h).padStart(2,"0")}:00 ${o.t}${o.a?" ("+AN[o.a]+")":""}${fx(o.e)}`)}
+sec("Giornata",ore);sec("Esito",MO[d.mood]?[MO[d.mood]]:[]);sec("Cosa mantengo",d.mantengo?[d.mantengo]:[]);sec("Cosa cambio",d.cambio?[d.cambio]:[]);return L.join("\n")}
+function build(kind){
+if(kind==="md")return{filename:`bussola-${D}.md`,data:dayMd(D,S.days[D]||{})};
+if(kind==="json")return{filename:"bussola-dati.json",data:JSON.stringify(S,null,2)};
+const rows=[["Data","Tipo","Voce","Dettaglio"]];Object.keys(S.days).sort().forEach(dt=>rows.push(...dayRows(dt,S.days[dt])));
+AREAS.forEach(a=>{if((S.sistema[a]||"").trim())rows.push(["","Sistema",a,S.sistema[a]])});
+COLS.forEach(([k,n])=>Object.values(S.prio[k]||{}).forEach(v=>{if(String(v).trim())rows.push(["","Priorità",v,n])}));
+return{filename:"bussola-dati.csv",data:"\uFEFF"+rows.map(r=>r.map(cq).join(";")).join("\r\n")}}
+let DL=null;
+const msg=t=>{const e=document.getElementById("exmsg");if(e)e.textContent=t};
+function showEx(){const c=document.getElementById("excard");if(c)c.classList.toggle("on",!!DL)}
+document.addEventListener("click",async e=>{const b=e.target.closest("[data-ex]");if(!b||!DL)return;
+try{await DL.save(build(b.dataset.ex));msg("File salvato.")}catch(x){msg(x&&x.code==="declined"?"":"Non è stato possibile salvare il file.")}});
+DL={save:async({filename,data})=>{const u=URL.createObjectURL(new Blob([data]));const a=document.createElement("a");a.href=u;a.download=filename;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),1500)}};
+const _r=render;render=function(){_r();showEx()};
+render();
+</script>
+</body>
+</html>
